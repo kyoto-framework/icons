@@ -76,16 +76,22 @@ func heroicons() {
 		[]byte(fmt.Sprintf(iconsetfiletmpl, "HeroiconsSolid", iconsetsolid)),
 		0644,
 	)
-	// Generate snippets file
-	snippets := []string{}
+	// Generate snippetsfunc file
+	snippetsfunc := []string{}
+	snippetsinline := []string{}
 	for _, icon := range iconset {
-		snippets = append(snippets, fmt.Sprintf(
+		snippetsfunc = append(snippetsfunc, fmt.Sprintf(
 			`"Icon: Heroicons %s %s": {"scope": "tmpl,html", "prefix": "i:heroicons-%s-%s", "body": ["%s"]}`,
 			icon.Name, icon.Type, icon.Name, icon.Type,
 			fmt.Sprintf("{{ icon `heroicons-%s` `%s` }}", icon.Type, icon.Name),
 		))
+		snippetsinline = append(snippetsinline, fmt.Sprintf(
+			`"Inline Icon: Heroicons %s %s": {"scope": "tmpl,html", "prefix": "ii:heroicons-%s-%s", "body": ["%s"]}`,
+			icon.Name, icon.Type, icon.Name, icon.Type, strings.ReplaceAll(icon.Content, "\"", "\\\""),
+		))
 	}
-	ioutil.WriteFile("heroicons.code-snippets", []byte(fmt.Sprintf(`{%s}`, strings.Join(snippets, ",\n"))), 0644)
+	ioutil.WriteFile("heroicons.code-snippets", []byte(fmt.Sprintf(`{%s}`, strings.Join(snippetsfunc, ",\n"))), 0644)
+	ioutil.WriteFile("heroicons-inline.code-snippets", []byte(fmt.Sprintf(`{%s}`, strings.Join(snippetsinline, ",\n"))), 0644)
 	// Cleanup
 	exec.Command("rm", "-rf", "/tmp/heroicons").Run()
 }
