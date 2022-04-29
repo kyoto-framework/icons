@@ -156,7 +156,7 @@ func iconifyicons() {
 			icon := Icon{
 				Name:    iconname,
 				Type:    icontype,
-				Content: strings.ReplaceAll(icon.(map[string]interface{})["body"].(string), "\n", ""),
+				Content: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">` + strings.ReplaceAll(icon.(map[string]interface{})["body"].(string), "\n", "") + `</svg>`,
 			}
 			// Update icon set template
 			iconsettmpl += "\"" + icon.Name + "\": `" + icon.Content + "`,\n"
