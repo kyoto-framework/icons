@@ -31,7 +31,7 @@ func heroicons() {
 		panic(err)
 	}
 	// Find icon paths
-	matches, err := filepath.Glob("/tmp/heroicons/src/**/*.svg")
+	matches, err := filepath.Glob("/tmp/heroicons/optimized/**/*.svg")
 	if err != nil {
 		panic(err)
 	}
