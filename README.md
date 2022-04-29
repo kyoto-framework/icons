@@ -31,18 +31,18 @@ func FuncMap() template.FuncMap {
 
 ## Usage
 
-In Go files:
+General signature: `Icon(iconset, name, ...classes)`
+
+Usage in Go files:
 
 ```go
-...
-
 icon1 := icons.Icon("heroicons-outline", "archive")
 icon2 := icons.Icon("heroicons-outline", "archive", "class1 class2")
 icon3 := icons.Icon("heroicons-outline", "archive", "class1", "class2")
 
 ```
 
-In templates:
+Usage in templates:
 
 ```html
 {{ icon `heroicons-outline` `archive` }}
